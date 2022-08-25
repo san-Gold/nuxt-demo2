@@ -14,3 +14,4 @@ jobs:
       - run: |
           ls -R
           echo "GITHUB_SHA-${GITHUB_SHA}"
+          echo "GITHUB_REF_NAME-${GITHUB_REF_NAME}"

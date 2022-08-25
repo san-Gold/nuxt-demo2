@@ -1,0 +1,36 @@
+name: Release to QA
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  APP_NAME: nuxt-demo1
+
+jobs:
+  build:
+    runs-on: [self-hosted, Linux, X64]
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          echo "---- 创建容器 -----"
+          docker build -t ${APP_NAME} -f ./docker/production/Dockerfile .
+
+          echo "---- 保存成tar压缩包 -----"
+          docker save -o ${APP_NAME}-${GITHUB_REF_NAME}.tar ${APP_NAME}
+
+          cp ${APP_NAME}-${GITHUB_REF_NAME}.tar /application/html/nuxt-demo/nuxt-demo1/
+
+          echo "---- 移动到相应目录 -----"
+          cd /application/html/nuxt-demo/nuxt-demo1/
+
+          echo "---- 恢复镜像文件-------"
+          docker load --input ${APP_NAME}-${GITHUB_REF_NAME}.tar
+
+          echo "---- 运行容器 -----"
+          docker run --name=${APP_NAME} -d -p 3002:3000 ${APP_NAME}
+
+          echo "---- 查看容器 -----"
+          docker ps -a

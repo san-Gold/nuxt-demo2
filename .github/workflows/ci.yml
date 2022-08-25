@@ -12,5 +12,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          cd /application/html/nuxt-demo/nuxt-demo1
-          rm -rf aaa
+          ls -R

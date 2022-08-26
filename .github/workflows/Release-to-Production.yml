@@ -1,4 +1,4 @@
-name: Release to QA
+name: Release to Production
 
 on:
   push:
@@ -8,6 +8,9 @@ on:
 
 env:
   APP_NAME: nuxt-demo1
+  DEPLOYMENT_DIR: /application/html/nuxt-demo/nuxt-demo1/
+  DOCKER_PORT: 3000
+  EXPOSE_PORT: 3002
 
 jobs:
   build:
@@ -21,16 +24,17 @@ jobs:
           echo "---- 保存成tar压缩包 -----"
           docker save -o ${APP_NAME}-${GITHUB_REF_NAME}.tar ${APP_NAME}
 
-          cp ${APP_NAME}-${GITHUB_REF_NAME}.tar /application/html/nuxt-demo/nuxt-demo1/
+          echo "---- 复制到相应目录 -----"
+          cp ${APP_NAME}-${GITHUB_REF_NAME}.tar ${DEPLOYMENT_DIR}
 
           echo "---- 移动到相应目录 -----"
-          cd /application/html/nuxt-demo/nuxt-demo1/
+          cd ${DEPLOYMENT_DIR}
 
           echo "---- 恢复镜像文件-------"
           docker load --input ${APP_NAME}-${GITHUB_REF_NAME}.tar
 
           echo "---- 运行容器 -----"
-          docker run --name=${APP_NAME} -d -p 3002:3000 ${APP_NAME}
+          docker run --name=${APP_NAME} -d -p ${EXPOSE_PORT}:${DOCKER_PORT} ${APP_NAME}
 
           echo "---- 查看容器 -----"
           docker ps -a

@@ -8,7 +8,6 @@ RUN npm config set unsafe-perm true && npm install --registry https://registry.n
 FROM node:16.16.0-alpine as builder
 
 ENV APP_ENV=staging
-ENV APP_ENV1=staging1
 
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules

@@ -1,4 +1,4 @@
-name: Release to QA
+name: test-ci
 
 on:
   push:

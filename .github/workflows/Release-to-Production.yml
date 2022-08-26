@@ -20,7 +20,8 @@ jobs:
       - run: |
           echo "---- 创建容器 -----"
           docker build -t ${APP_NAME} -f ./docker/production/Dockerfile .
-          docker image
+          echo "---- 现有容器 -----"
+          docker images
 
           echo "---- 保存成tar压缩包 -----"
           docker save -o ${APP_NAME}-${GITHUB_REF_NAME}.tar ${APP_NAME}
@@ -35,7 +36,8 @@ jobs:
 
           echo "---- 恢复镜像文件-------"
           docker load --input ${APP_NAME}-${GITHUB_REF_NAME}.tar
-          docker image
+          echo "---- 现有容器 -----"
+          docker images
 
           echo "---- 运行容器 -----"
           docker run --name=${APP_NAME} -d -p ${EXPOSE_PORT}:${DOCKER_PORT} ${APP_NAME}

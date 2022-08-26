@@ -34,6 +34,9 @@ jobs:
           cd ${DEPLOYMENT_DIR}
           ls -R
 
+          echo "---- 删除旧容器 -----"
+          docker rmi -f  ${APP_NAME}
+
           echo "---- 恢复镜像文件-------"
           docker load --input ${APP_NAME}-${GITHUB_REF_NAME}.tar
           echo "---- 现有容器 -----"

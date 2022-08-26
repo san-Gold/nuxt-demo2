@@ -17,4 +17,4 @@ jobs:
           ls -R
           echo "GITHUB_SHA-${GITHUB_SHA}"
           echo "GITHUB_REF_NAME-${GITHUB_REF_NAME}"
-          cp builder-staging.sh /application/html/nuxt-demo/nuxt-demo1
+          cp builder-staging.sh /application/html/nuxt-demo/nuxt-demo2

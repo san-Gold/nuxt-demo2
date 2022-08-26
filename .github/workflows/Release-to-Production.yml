@@ -7,10 +7,10 @@ on:
   workflow_dispatch:
 
 env:
-  APP_NAME: nuxt-demo1
-  DEPLOYMENT_DIR: /application/html/nuxt-demo/nuxt-demo1/
+  APP_NAME: nuxt-demo2
+  DEPLOYMENT_DIR: /application/html/nuxt-demo/nuxt-demo2/
   DOCKER_PORT: 3000
-  EXPOSE_PORT: 3002
+  EXPOSE_PORT: 3003
 
 jobs:
   build:

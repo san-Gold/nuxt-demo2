@@ -11,7 +11,7 @@ ENV APP_ENV=production
 
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-COPY ./docker/production/nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 COPY . .
 RUN npm run build
 

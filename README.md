@@ -1,4 +1,4 @@
-# nuxt-demo1
+# nuxt-demo2
 
 本项目主要为了测试nuxt项目用github runner以docker形式在服务器上部署，可供学习使用。docker形式为docker压缩包，docker部署，暂未使用docker compost形式。
 

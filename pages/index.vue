@@ -1,5 +1,5 @@
 <template>
-  <div
+  <h1
     @click="
       () => {
         $router.push(`/login`)
@@ -7,7 +7,7 @@
     "
   >
     nuxt
-  </div>
+  </h1>
 </template>
 
 <script>

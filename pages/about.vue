@@ -1,5 +1,5 @@
 <template>
-  <div
+  <h1
     @click="
       () => {
         $router.push(`/`)
@@ -7,7 +7,7 @@
     "
   >
     about
-  </div>
+  </h1>
 </template>
 
 <script>

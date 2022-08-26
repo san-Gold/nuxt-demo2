@@ -1,0 +1,51 @@
+name: Release to Production
+
+on:
+  push:
+    branches:
+      - staging
+  workflow_dispatch:
+
+env:
+  APP_NAME: nuxt-demo1
+  DEPLOYMENT_DIR: /application/html/nuxt-demo/nuxt-demo1/
+  DOCKER_PORT: 3000
+  EXPOSE_PORT: 3002
+
+jobs:
+  build:
+    runs-on: [self-hosted, Linux, X64]
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          echo "---- 创建容器 -----"
+          docker build -t ${APP_NAME} -f ./docker/staging/Dockerfile .
+          echo "---- 现有容器 -----"
+          docker images
+
+          echo "---- 保存成tar压缩包 -----"
+          docker save -o ${APP_NAME}-${GITHUB_REF_NAME}.tar ${APP_NAME}
+          ls -R
+
+          echo "---- 复制到相应目录 -----"
+          cp ${APP_NAME}-${GITHUB_REF_NAME}.tar ${DEPLOYMENT_DIR}
+
+          echo "---- 移动到相应目录 -----"
+          cd ${DEPLOYMENT_DIR}
+          ls -R
+
+          echo "---- 删除旧容器 -----"
+          docker rmi -f ${APP_NAME}
+          docker stop ${APP_NAME}
+          docker rm ${APP_NAME}
+
+          echo "---- 恢复镜像文件-------"
+          docker load --input ${APP_NAME}-${GITHUB_REF_NAME}.tar
+          echo "---- 现有容器 -----"
+          docker images
+
+          echo "---- 运行容器 -----"
+          docker run --name=${APP_NAME} -d -p ${EXPOSE_PORT}:${DOCKER_PORT} ${APP_NAME}
+
+          echo "---- 查看容器 -----"
+          docker ps -a

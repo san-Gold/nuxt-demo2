@@ -1,5 +1,5 @@
 <template>
-  <div
+  <h1
     @click="
       () => {
         $router.push(`/about`)
@@ -7,7 +7,7 @@
     "
   >
     login
-  </div>
+  </h1>
 </template>
 
 <script>

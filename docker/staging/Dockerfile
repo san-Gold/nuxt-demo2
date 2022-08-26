@@ -11,6 +11,7 @@ ENV APP_ENV=staging
 
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
+COPY ./docker/staging/nginx.conf /etc/nginx/conf.d/default.conf
 COPY . .
 RUN npm run build
 

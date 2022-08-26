@@ -2,11 +2,11 @@
   <div
     @click="
       () => {
-        $router.push(`/login`)
+        $router.push(`/`)
       }
     "
   >
-    nuxt
+    about
   </div>
 </template>
 

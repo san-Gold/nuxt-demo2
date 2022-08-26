@@ -11,6 +11,7 @@ ENV APP_ENV=qa
 
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
+COPY ./docker/qa/nginx.conf /etc/nginx/conf.d/default.conf
 COPY . .
 RUN npm run build
 

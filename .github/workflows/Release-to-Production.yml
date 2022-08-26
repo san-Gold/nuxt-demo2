@@ -20,18 +20,22 @@ jobs:
       - run: |
           echo "---- 创建容器 -----"
           docker build -t ${APP_NAME} -f ./docker/production/Dockerfile .
+          docker image
 
           echo "---- 保存成tar压缩包 -----"
           docker save -o ${APP_NAME}-${GITHUB_REF_NAME}.tar ${APP_NAME}
+          ls -R
 
           echo "---- 复制到相应目录 -----"
           cp ${APP_NAME}-${GITHUB_REF_NAME}.tar ${DEPLOYMENT_DIR}
 
           echo "---- 移动到相应目录 -----"
           cd ${DEPLOYMENT_DIR}
+          ls -R
 
           echo "---- 恢复镜像文件-------"
           docker load --input ${APP_NAME}-${GITHUB_REF_NAME}.tar
+          docker image
 
           echo "---- 运行容器 -----"
           docker run --name=${APP_NAME} -d -p ${EXPOSE_PORT}:${DOCKER_PORT} ${APP_NAME}

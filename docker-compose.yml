@@ -1,0 +1,16 @@
+version: '3'
+services: 
+    app:
+      build:
+        context: ./
+        dockerfile: docker/production/Dockerfile
+        args:
+          APP_ENV: production
+      image: nuxt-demo2
+      container_name: nuxt-demo2
+      expose:
+        - 3000
+      ports:
+        - "3002:3000"
+      restart: always
+      mem_limit: 1G

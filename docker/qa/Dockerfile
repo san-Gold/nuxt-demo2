@@ -7,11 +7,12 @@ RUN npm config set unsafe-perm true && npm install --registry https://registry.n
 
 FROM node:16.16.0-alpine as builder
 
-ENV APP_ENV=qa
+ARG APP_ENV
+ENV APP_ENV=$APP_ENV
 
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 COPY . .
 RUN npm run build
 
@@ -22,6 +23,5 @@ WORKDIR /app
 COPY --from=builder /app  .
 
 ENV HOST 0.0.0.0
-EXPOSE 3000
 
 CMD [ "yarn", "start" ]

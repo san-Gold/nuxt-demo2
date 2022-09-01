@@ -6,7 +6,7 @@
       }
     "
   >
-    nuxt
+    nuxt docker-compose
   </h1>
 </template>
 

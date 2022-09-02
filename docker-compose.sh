@@ -2,7 +2,7 @@ APP_ENV=""
 NAME=""
 TYPE
 EXPOSE=3000
-POST=3002
+POST=9231
 
 while getopts ":e:n:t:" opt
 do

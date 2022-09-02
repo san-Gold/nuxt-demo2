@@ -36,10 +36,10 @@ jobs:
           cd ${DEPLOYMENT_DIR}
           ls -R
 
-          echo "---- 删除旧容器 -----"
-          docker rmi -f ${APP_NAME}
-          docker stop ${APP_NAME}
-          docker rm ${APP_NAME}
+          # echo "---- 删除旧容器 -----"
+          # docker rmi -f ${APP_NAME}
+          # docker stop ${APP_NAME}
+          # docker rm ${APP_NAME}
 
           echo "---- 恢复镜像文件-------"
           docker load --input ${APP_NAME}.tar

@@ -18,7 +18,7 @@ jobs:
       - run: |
           echo "---- 创建容器 -----"
           chmod +x ./docker-compose.sh
-          ./docker-compose.sh -e production -n ${APP_NAME} -t build
+          ./docker-compose.sh -e staging -n ${APP_NAME} -t build
 
           echo "---- 现有容器 -----"
           docker images

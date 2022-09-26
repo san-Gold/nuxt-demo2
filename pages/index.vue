@@ -18,6 +18,7 @@ export default {
   head() {
     return {
       title: `Rick`,
+      a: 'a',
     }
   },
   methods: {

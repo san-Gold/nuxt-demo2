@@ -21,6 +21,7 @@ export default {
       a: 'a',
       b: 'b',
       c: 'c',
+      f: 'f',
       e: 'e',
     }
   },

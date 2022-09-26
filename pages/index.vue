@@ -22,6 +22,7 @@ export default {
       b: 'b',
       c: 'c',
       f: 'f',
+      e: 'e',
     }
   },
   methods: {

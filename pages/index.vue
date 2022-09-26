@@ -19,6 +19,7 @@ export default {
     return {
       title: `Rick`,
       a: 'a',
+      b: 'b',
     }
   },
   methods: {

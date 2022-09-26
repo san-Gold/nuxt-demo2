@@ -20,6 +20,7 @@ export default {
       title: `Rick`,
       a: 'a',
       b: 'b',
+      c: 'c',
     }
   },
   methods: {
